@@ -223,7 +223,7 @@ td.mono{font-family:var(--mono);font-weight:700}
     document.querySelectorAll('[data-close]').forEach(function(b){ b.onclick = closeSheet; });
     document.querySelectorAll('[data-back]').forEach(function(b){ b.onclick = function(){ ui.sheet.step--; render(); }; });
     document.querySelectorAll('[data-copy]').forEach(function(b){ b.onclick = function(){ copyText(b.dataset.copy); }; });
-    if ((x=$('ov'))) x.onclick = function(e){ if (e.target===x) closeSheet(); };
+    var ov = $('ov'); if (ov) ov.onclick = function(e){ if (e.target===ov) closeSheet(); };
     if ((x=$('f1'))) x.onsubmit = function(e){ e.preventDefault(); ui.nombre=$('b_no').value.trim(); ui.apellido=$('b_ap').value.trim();
       if (!ui.nombre || !ui.apellido) return; try { localStorage.setItem('rifa_nombre',ui.nombre); localStorage.setItem('rifa_apellido',ui.apellido); } catch(err) {}
       ui.sheet.step=2; render(); };
