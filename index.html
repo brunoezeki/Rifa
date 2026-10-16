@@ -101,6 +101,8 @@ td.mono{font-family:var(--mono);font-weight:700}
 <body>
 <div id="app"></div>
 <script type="application/json" id="rifa-cfg">{
+ "titulo": "Aspiradora Robot Gadnic Z900",
+ "detalle": "Trapeadora 3 modos · control por app · 3 meses de uso",
  "premio": "Aspiradora Robot Gadnic Z900 Trapeadora 3 Modos (3 meses de uso)",
  "precio": 8000,
  "promo2": 14000,
@@ -141,7 +143,8 @@ td.mono{font-family:var(--mono);font-weight:700}
   }
   function load(){
     if (!/^https:\/\//.test(C.csv||'')) { ui.loaded = true; ui.err = true; render(); return; }
-    fetch(C.csv + (C.csv.indexOf('?')>=0?'&':'?') + '_=' + Date.now(), {cache:'no-store'}).then(function(r){ if (!r.ok) throw 0; return r.text(); }).then(function(t){
+    var get = function(u){ return fetch(u, {cache:'no-store'}).then(function(r){ if (!r.ok) throw 0; return r.text(); }).then(function(t){ if (!/^\s*"?n[uú]mero/i.test(t)) throw 0; return t; }); };
+    get(C.csv).catch(function(){ return get(C.csv + '&_=' + Date.now()); }).then(function(t){
       var next = {};
       parseCSV(t).forEach(function(r){ var n = parseInt(r[0],10), e = String(r[1]||'').trim().toLowerCase();
         if (n>=1 && n<=100) { if (e.indexOf('vend')===0 || e.indexOf('pag')===0) next[n]='v'; else if (e.indexOf('res')===0) next[n]='r'; } });
@@ -156,7 +159,7 @@ td.mono{font-family:var(--mono);font-weight:700}
     var nv = count('v'), nr = count('r');
     var h = '<div class="wrap">';
     h += '<header class="ticket">' + (C.foto ? '<img src="' + esc(C.foto) + '" alt="' + esc(C.premio||'Premio') + '">' : '') +
-      '<div class="tk-body"><div class="eyebrow">Rifa · 100 números</div><h1>' + esc(C.premio || 'Rifa') + '</h1>' +
+      '<div class="tk-body"><div class="eyebrow">Rifa · 100 números</div><h1>' + esc(C.titulo || C.premio || 'Rifa') + '</h1>' + (C.detalle ? '<p class="hint" style="font-size:16px">' + esc(C.detalle) + '</p>' : '') +
       '<div class="prices"><div class="price"><small>1 número</small><b>' + money(C.precio) + '</b></div>' +
       (C.promo2 ? '<div class="price promo"><small>Promo 2 números</small><b>' + money(C.promo2) + '</b></div>' : '') + '</div>' +
       '<div class="facts">' + (C.sorteo ? '<span>Sorteo <b>' + esc(C.sorteo) + '</b></span>' : '') + '<span>Quedan <b>' + (ui.loaded && !ui.err ? (100-nv-nr) : '…') + '</b> libres</span></div></div></header>';
