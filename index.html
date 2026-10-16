@@ -106,7 +106,7 @@ td.mono{font-family:var(--mono);font-weight:700}
  "premio": "Aspiradora Robot Gadnic Z900 Trapeadora 3 Modos (3 meses de uso)",
  "precio": 8000,
  "promo2": 14000,
- "sorteo": "1/11",
+ "sorteo": "Lun 2/11 · Nacional Nocturna",
  "alias": "brunobez",
  "titular": "Bruno Bortolutti",
  "whatsapp": "5493412612311",
@@ -169,6 +169,9 @@ td.mono{font-family:var(--mono);font-weight:700}
       '<li>Mandá el comprobante por WhatsApp. Cuando lo confirmemos, tu número queda marcado.</li></ol>' +
       '<div class="alias"><code id="aliasmain">' + esc(C.alias||'—') + '</code><button class="btn sm" data-copy="aliasmain" type="button">Copiar alias</button></div>' +
       (C.titular ? '<p class="hint">Titular: <b style="color:var(--ink)">' + esc(C.titular) + '</b></p>' : '') + '</section>';
+    h += '<section class="how"><h3>Cómo se sortea</h3>' +
+      '<p style="margin:0">Gana el número que coincida con las <b>2 últimas cifras del 1° premio</b> de la <b>Quiniela Nacional Nocturna</b> del <b>lunes 2 de noviembre</b>. Si sale <b>00</b>, gana el <b>100</b>.</p>' +
+      '<p class="hint">Si el número ganador no se vendió, pasa al 2° premio de la misma quiniela, y así sucesivamente hasta que salga un número vendido.</p></section>';
     if (ui.err) h += '<div class="warn">No pudimos cargar los números ocupados. Si elegís uno, te confirmamos por WhatsApp que esté libre.</div>';
     h += '<div class="progress"><div class="legend"><span><i class="sw"></i>Libre</span><span><i class="sw p"></i>Tu elección</span><span><i class="sw r"></i>Reservado</span><span><i class="sw s"></i>Vendido</span>' +
       '<span style="margin-left:auto"><b style="color:var(--ink)">' + nv + '</b> vendidos</span></div>' +
